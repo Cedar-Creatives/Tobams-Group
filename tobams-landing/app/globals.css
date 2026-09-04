@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* Brand Colors */
+  --color-primary: #7B2D8B;
+  --color-primary-dark: #5A1F6B;
+  --color-btn-cta-bg: #E8415A;
+  --color-btn-cta-hover: #C8303A;
+  --color-btn-account-bg: #4A1F6B;
+  --color-btn-learn-more-bg: #5A1F6B;
+  --color-nav-bg: #FFFFFF;
+  --color-nav-text: #1A1A1A;
+  --color-nav-active: #7B2D8B;
+  --color-border-light: #E8E0EC;
+  --color-hero-bg: #1A1A2E;
+  --color-hero-tag-bg: rgba(255,255,255,0.15);
+  --color-hero-heading: #FFFFFF;
+  --color-hero-body: rgba(255,255,255,0.85);
+  --color-section-bg-light: #F5EEF8;
+  --color-section-bg-white: #FFFFFF;
+  --color-section-bg-lavender: #F0E8F5;
+  --color-subheading-accent: #7B2D8B;
+  --color-feature-grid-bg: #5A1F6B;
+  --color-feature-grid-heading: #FFFFFF;
+  --color-feature-grid-body: rgba(255,255,255,0.80);
+  --color-cta-banner-bg: #4A1040;
+  --color-cta-banner-text: #FFFFFF;
+  --color-btn-outline-bg: #FFFFFF;
+  --color-btn-outline-text: #4A1040;
+  --color-btn-outline-border: #FFFFFF;
+  --color-testimonial-bg: #FFFFFF;
+  --color-testimonial-card-bg: #FFFFFF;
+  --color-testimonial-card-border: #E8E0EC;
+  --color-testimonial-card-accent: #E8415A;
+  --color-testimonial-name: #1A1A1A;
+  --color-testimonial-role: #777777;
+  --color-testimonial-body: #3A3A3A;
+  --color-carousel-arrow: #E8415A;
+  --color-carousel-arrow-border: #E8415A;
+  --color-footer-bg: #1A0A22;
+  --color-footer-text: rgba(255,255,255,0.75);
+  --color-footer-heading: #FFFFFF;
+  --color-footer-logo-text: #FFFFFF;
+  --color-footer-accent: #E8415A;
+  --color-footer-contact-icon: #E8415A;
+  --color-footer-divider: rgba(255,255,255,0.12);
+  --color-footer-offices-bg: #2A1232;
+  --color-footer-offices-border: rgba(255,255,255,0.10);
+  --color-pre-cta-text: #FFFFFF;
+  --color-pre-cta-subtext: rgba(255,255,255,0.70);
+  --color-btn-get-in-touch: #5A1F6B;
+  --color-copyright-text: rgba(255,255,255,0.50);
+  --color-section-bg-pink: #FDEEF0;
+  --color-feature-pill-bg: #FFFFFF;
+  --color-feature-pill-border: #E8E0EC;
+  --color-feature-pill-icon: #7B2D8B;
+  --color-feature-pill-text: #1A1A1A;
+  --color-card-info-bg: #EDE0F0;
+  --color-card-info-border: #D8C4E0;
+  --color-heading-section: #5A1F6B;
+  --color-heading-dark: #1A1A1A;
+  --color-body-text: #3A3A3A;
+  --color-list-icon: #5A1F6B;
+  --color-text-primary: #1A1A1A;
+  --color-text-secondary: #555555;
+  --color-card-dark-bg: #3D1040;
+  --color-list-pill-bg: #5A2060;
+  --color-list-pill-text: #FFFFFF;
+
+  /* Typography */
+  --font-family-primary: var(--font-inter), sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
+
+  /* Custom screens */
+  --breakpoint-xs: 425px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1280px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-inter), sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #1A1A1A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

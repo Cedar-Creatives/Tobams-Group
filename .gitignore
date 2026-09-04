@@ -1,0 +1,48 @@
+# Kiro IDE spec files and steering — not for submission
+.kiro/
+
+# Assessment brief (private HR document)
+tobams-assessment-requirements.md
+
+# ---- tobams-landing (Next.js project) ----
+
+# dependencies
+tobams-landing/node_modules/
+tobams-landing/.pnp
+tobams-landing/.pnp.*
+tobams-landing/.yarn/*
+!tobams-landing/.yarn/patches
+!tobams-landing/.yarn/plugins
+!tobams-landing/.yarn/releases
+!tobams-landing/.yarn/versions
+
+# testing
+tobams-landing/coverage/
+
+# next.js
+tobams-landing/.next/
+tobams-landing/out/
+
+# production
+tobams-landing/build/
+
+# misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+tobams-landing/*.tsbuildinfo
+tobams-landing/next-env.d.ts
