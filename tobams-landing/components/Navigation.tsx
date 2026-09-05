@@ -4,7 +4,12 @@ import { useState } from "react";
 import { ChevronDown, User, Menu, X } from "lucide-react";
 import Logo from "./Logo";
 
-const navLinks = [
+interface NavLink {
+  label: string;
+  hasDropdown: boolean;
+}
+
+const navLinks: NavLink[] = [
   { label: "About", hasDropdown: true },
   { label: "What We Do", hasDropdown: true },
   { label: "Jobs", hasDropdown: true },
@@ -21,15 +26,17 @@ export default function Navigation() {
 
   return (
     <header className="bg-white sticky top-0 z-50 shadow-sm">
-      {/* Top bar: Logo + Buttons */}
+      {/* ── Row 1: Top bar (Logo + Account + Take Assessment) ── */}
       <div className="border-b border-[#E8E0EC]">
         <div className="max-w-[1280px] mx-auto px-5 lg:px-10 flex items-center justify-between h-14">
+          {/* Logo — always visible */}
           <Logo />
 
-          {/* Desktop buttons */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Desktop utility buttons — hidden below lg */}
+          <div className="hidden lg:flex items-center gap-3">
             <button
-              className="flex items-center gap-2 bg-[#4A1F6B] text-white text-sm font-semibold px-4 py-2 rounded-[6px] hover:bg-[#3a1858] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4A1F6B]"
+              type="button"
+              className="flex items-center gap-2 bg-[#4A1F6B] text-white text-[14px] font-semibold px-4 py-2 rounded-[6px] hover:bg-[#3a1858] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]"
               aria-label="Account"
             >
               <User size={15} aria-hidden="true" />
@@ -37,17 +44,19 @@ export default function Navigation() {
               <ChevronDown size={14} aria-hidden="true" />
             </button>
             <button
-              className="bg-[#E8415A] text-white text-sm font-semibold px-5 py-2 rounded-[6px] hover:bg-[#C8303A] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8415A]"
+              type="button"
+              className="bg-[#E8415A] text-white text-[14px] font-semibold px-5 py-2 rounded-[6px] hover:bg-[#C8303A] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8415A]"
             >
               Take Assessment
             </button>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile hamburger — visible below lg */}
           <button
-            className="md:hidden flex items-center justify-center w-11 h-11 bg-[#1A1A1A] rounded-[8px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            type="button"
+            className="lg:hidden flex items-center justify-center w-11 h-11 bg-[#1A1A1A] rounded-[8px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
           >
@@ -60,17 +69,23 @@ export default function Navigation() {
         </div>
       </div>
 
-      {/* Links bar — desktop only */}
-      <nav aria-label="Main navigation" className="hidden md:block border-b border-[#E8E0EC]">
+      {/* ── Row 2: Links bar — desktop only ── */}
+      <nav
+        aria-label="Main navigation"
+        className="hidden lg:block border-b border-[#E8E0EC]"
+      >
         <div className="max-w-[1280px] mx-auto px-5 lg:px-10 flex items-center h-11 gap-6">
           {navLinks.map((link) => (
             <button
               key={link.label}
-              className={`flex items-center gap-1 text-[14px] font-${activeItem === link.label ? "semibold" : "normal"} whitespace-nowrap transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B] ${
+              type="button"
+              className={[
+                "flex items-center gap-1 text-[14px] whitespace-nowrap transition-colors",
+                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]",
                 activeItem === link.label
-                  ? "text-[#7B2D8B] border-b-2 border-[#7B2D8B] pb-[1px]"
-                  : "text-[#1A1A1A] hover:text-[#7B2D8B]"
-              }`}
+                  ? "text-[#7B2D8B] font-semibold border-b-2 border-[#7B2D8B] pb-[1px]"
+                  : "text-[#1A1A1A] font-normal hover:text-[#7B2D8B]",
+              ].join(" ")}
             >
               {link.label}
               {link.hasDropdown && (
@@ -81,22 +96,25 @@ export default function Navigation() {
         </div>
       </nav>
 
-      {/* Mobile menu overlay */}
+      {/* ── Mobile menu overlay — revealed when mobileOpen ── */}
       {mobileOpen && (
         <nav
           id="mobile-menu"
           aria-label="Mobile navigation"
-          className="md:hidden bg-white border-t border-[#E8E0EC]"
+          className="lg:hidden bg-white border-t border-[#E8E0EC]"
         >
-          <ul className="flex flex-col py-2">
+          <ul className="flex flex-col py-2" role="list">
             {navLinks.map((link) => (
               <li key={link.label}>
                 <button
-                  className={`w-full flex items-center justify-between px-5 py-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B] ${
+                  type="button"
+                  className={[
+                    "w-full flex items-center justify-between px-5 py-3 text-sm font-medium transition-colors",
+                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]",
                     activeItem === link.label
                       ? "text-[#7B2D8B] bg-[#F5EEF8]"
-                      : "text-[#1A1A1A] hover:bg-[#F5EEF8]"
-                  }`}
+                      : "text-[#1A1A1A] hover:bg-[#F5EEF8]",
+                  ].join(" ")}
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
@@ -107,15 +125,21 @@ export default function Navigation() {
               </li>
             ))}
           </ul>
+
+          {/* Mobile utility buttons stacked below links */}
           <div className="flex flex-col gap-3 px-5 py-4 border-t border-[#E8E0EC]">
             <button
-              className="flex items-center justify-center gap-2 bg-[#4A1F6B] text-white text-sm font-semibold px-4 py-2.5 rounded-[6px] hover:bg-[#3a1858] transition-colors"
+              type="button"
+              className="flex items-center justify-center gap-2 bg-[#4A1F6B] text-white text-sm font-semibold px-4 py-2.5 rounded-[6px] hover:bg-[#3a1858] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]"
               aria-label="Account"
             >
               <User size={15} aria-hidden="true" />
               Account
             </button>
-            <button className="bg-[#E8415A] text-white text-sm font-semibold px-5 py-2.5 rounded-[6px] hover:bg-[#C8303A] transition-colors">
+            <button
+              type="button"
+              className="bg-[#E8415A] text-white text-sm font-semibold px-5 py-2.5 rounded-[6px] hover:bg-[#C8303A] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8415A]"
+            >
               Take Assessment
             </button>
           </div>

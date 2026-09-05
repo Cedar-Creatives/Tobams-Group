@@ -1,39 +1,28 @@
 export default function CtaBanner() {
   return (
-    <section aria-labelledby="cta-heading" className="bg-white py-8 px-5 lg:px-20">
-      <div className="max-w-[1280px] mx-auto">
-        {/* Desktop: full-width strip */}
-        <div className="hidden md:block bg-[#4A1040] py-12 px-10 text-center">
-          <p
-            id="cta-heading"
-            className="text-[18px] lg:text-[20px] font-normal text-white leading-[1.5] max-w-[640px] mx-auto mb-6"
-          >
-            Want to accelerate professional growth and development at your organisation?{" "}
-            <span>See how we can help.</span>
-          </p>
-          <a
-            href="#"
-            className="inline-block bg-white text-[#4A1040] text-[14px] font-semibold px-7 py-3 rounded-[6px] border-2 border-white hover:bg-[#f5f5f5] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            Book a Consultation
-          </a>
-        </div>
+    <section
+      className="bg-[#4A1040] py-12 lg:py-14 mx-4 rounded-[16px] lg:mx-0 lg:rounded-none"
+      aria-label="Call to action"
+    >
+      <div className="max-w-[640px] mx-auto px-5 text-center flex flex-col items-center gap-6">
 
-        {/* Mobile: rounded card with different copy */}
-        <div className="md:hidden bg-[#4A1040] rounded-[16px] py-10 px-6 text-center">
-          <p
-            className="text-[18px] font-normal text-white leading-[1.5] mb-6"
-          >
-            Don&apos;t just dream it &mdash; let&apos;s build it! Click now and start your
-            project with Tobams Group. Your journey to digital excellence begins here.
-          </p>
-          <a
-            href="#"
-            className="inline-block bg-white text-[#4A1040] text-[14px] font-semibold px-7 py-3.5 rounded-[6px] border-2 border-white hover:bg-[#f5f5f5] transition-colors w-[75%] text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-          >
-            Book a Consultation
-          </a>
-        </div>
+        {/* Desktop copy — hidden on mobile */}
+        <p className="hidden md:block text-white text-[18px] lg:text-[20px] font-normal leading-[1.5]">
+          Want to accelerate professional growth and development at your organisation? See how we can help.
+        </p>
+
+        {/* Mobile copy — hidden on desktop */}
+        <p className="md:hidden text-white text-[18px] font-normal leading-[1.5]">
+          Don&apos;t just dream it—let&apos;s build it! Click now and start your project with Tobams Group. Your journey to digital excellence begins here.
+        </p>
+
+        {/* CTA button — outline/ghost style */}
+        <button
+          type="button"
+          className="bg-white text-[#4A1040] border-2 border-white text-[14px] font-semibold px-7 py-3 rounded-[6px] hover:bg-[#f0e8ec] transition-colors w-[75%] md:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        >
+          Book a Consultation
+        </button>
       </div>
     </section>
   );

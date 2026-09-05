@@ -1,21 +1,31 @@
 import { ArrowUpRight, ChevronRight } from "lucide-react";
 
-const gridItems = [
+interface FeatureGridItem {
+  id: number;
+  heading: string;
+  body: string;
+}
+
+const featureGridItems: FeatureGridItem[] = [
   {
+    id: 1,
     heading: "Expert-Led Learning",
-    body: "Gain insight from seasoned professionals with deep domain expertise and real-world experience.",
+    body: "Gain insight from seasoned professionals and industry experts who bring real-world experience to every session.",
   },
   {
+    id: 2,
     heading: "Interactive Workshops",
-    body: "Engage in hands-on workshops that reinforce learning through practical application and collaboration.",
+    body: "Engage in hands-on workshops that reinforce theoretical knowledge with practical application.",
   },
   {
+    id: 3,
     heading: "Comprehensive Curriculum",
-    body: "Access a robust curriculum covering everything you need to excel as a certified consultant and trainer.",
+    body: "Access a robust curriculum carefully designed to cover all aspects of effective consulting and training.",
   },
   {
+    id: 4,
     heading: "Global Recognition",
-    body: "You will attain a globally recognized certification that opens doors to opportunities worldwide.",
+    body: "You will attain a globally recognized certification that validates your expertise and opens new career opportunities.",
   },
 ];
 
@@ -26,34 +36,37 @@ export default function TrainingConsultantSection() {
       aria-labelledby="ttc-heading"
     >
       <div className="max-w-[1280px] mx-auto px-5 lg:px-20">
+        {/* H2 heading */}
         <h2
           id="ttc-heading"
-          className="text-[22px] md:text-[28px] lg:text-[34px] font-bold text-[#1A1A1A] mb-2 leading-[1.25]"
+          className="text-[#1A1A1A] font-bold text-[22px] lg:text-[32px] leading-[1.2] mb-2"
         >
           Training The Consultant
         </h2>
-        <p className="text-[14px] font-semibold text-[#7B2D8B] mb-4">
+
+        {/* Accent subheading */}
+        <p className="text-[#7B2D8B] font-semibold text-[14px] mb-4">
           Maximise Your Potential as a Certified Trainer:
         </p>
-        <p className="text-[14px] text-[#3A3A3A] leading-[1.7] mb-6 max-w-full">
-          Our Training The Consultant program is specifically designed for professionals
-          who want to become certified trainers and consultants. Gain the expertise,
-          credentials, and confidence to deliver impactful training programs and drive
-          meaningful change in organisations worldwide.
+
+        {/* Body paragraph */}
+        <p className="text-[#3A3A3A] text-[14px] leading-[1.7] mb-6">
+          Tobams Group&apos;s Training The Consultant program is designed to empower
+          individuals to become highly effective trainers and consultants. With a
+          comprehensive curriculum and expert-led training, you&apos;ll gain the skills
+          and knowledge to excel in the dynamic world of consulting and training.
+          Our program is your gateway to a successful consulting career.
         </p>
 
         {/* Feature grid card */}
-        <div className="bg-[#5A1F6B] rounded-[12px] p-7 lg:p-8 mb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-x-12 lg:gap-y-6">
-            {gridItems.map((item) => (
-              <div key={item.heading}>
-                <h3 className="text-white text-[14px] font-bold mb-1.5">
+        <div className="bg-[#5A1F6B] rounded-[12px] p-6 lg:p-8 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8">
+            {featureGridItems.map((item) => (
+              <div key={item.id}>
+                <h3 className="text-white font-bold text-[14px] mb-1.5">
                   {item.heading}
                 </h3>
-                <p
-                  className="text-[13px] leading-[1.6]"
-                  style={{ color: "rgba(255,255,255,0.80)" }}
-                >
+                <p className="text-[rgba(255,255,255,0.80)] text-[13px] leading-[1.6]">
                   {item.body}
                 </p>
               </div>
@@ -61,16 +74,23 @@ export default function TrainingConsultantSection() {
           </div>
         </div>
 
-        {/* CTA button */}
-        <a
-          href="#"
-          className="inline-flex items-center gap-2 bg-[#5A1F6B] text-white text-[14px] font-semibold px-6 py-3 rounded-[6px] hover:bg-[#4a1858] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A1F6B]"
+        {/* Desktop button — hidden on mobile */}
+        <button
+          type="button"
+          className="hidden lg:inline-flex items-center gap-2 bg-[#5A1F6B] text-white text-[14px] font-semibold px-6 py-3 rounded-[6px] hover:bg-[#4A1058] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A1F6B]"
         >
           Learn More
-          {/* diagonal arrow on desktop, chevron on mobile */}
-          <ArrowUpRight size={16} aria-hidden="true" className="hidden md:inline" />
-          <ChevronRight size={16} aria-hidden="true" className="inline md:hidden" />
-        </a>
+          <ArrowUpRight size={16} aria-hidden="true" />
+        </button>
+
+        {/* Mobile button — hidden on desktop */}
+        <button
+          type="button"
+          className="inline-flex lg:hidden items-center gap-2 bg-[#5A1F6B] text-white text-[14px] font-semibold px-6 py-3 rounded-[6px] hover:bg-[#4A1058] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A1F6B]"
+        >
+          Learn More
+          <ChevronRight size={16} aria-hidden="true" />
+        </button>
       </div>
     </section>
   );

@@ -64,8 +64,13 @@
   --color-text-primary: #1A1A1A;
   --color-text-secondary: #555555;
   --color-card-dark-bg: #3D1040;
+  --color-card-dark-border: #5A2060;
   --color-list-pill-bg: #5A2060;
   --color-list-pill-text: #FFFFFF;
+  --color-heading-on-dark: #FFFFFF;
+  --color-body-on-dark: rgba(255,255,255,0.80);
+  --color-eyebrow-italic-accent: #7B2D8B;
+  --color-footer-pre-bg: #1A0A22;
 
   /* Typography */
   --font-family-primary: var(--font-inter), sans-serif;
@@ -84,6 +89,12 @@
   --breakpoint-xs: 425px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1280px;
+}
+
+/* Carousel track — consumed by Testimonials.tsx via CSS custom property --carousel-offset */
+.carousel-track {
+  transform: translateX(var(--carousel-offset, 0px));
+  transition: transform 0.3s ease;
 }
 
 * {

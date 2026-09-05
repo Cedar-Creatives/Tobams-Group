@@ -1,10 +1,10 @@
-# Tobams Group — Frontend Intern Assessment
+# Tobams Group — Frontend Developer Intern Assessment
 
 Pixel-perfect, fully responsive Next.js landing page converted from the [Figma design](https://www.figma.com/design/wuqCLkK1feTgB6xxSRRwZu/Frontend-Intern-Assessment).
 
 ## 🔗 Live URL
 
-> **[https://tobams-landing.vercel.app](https://tobams-landing.vercel.app)**  
+> **[https://tobams-landing.vercel.app](https://tobams-landing.vercel.app)**
 > *(Update this link after deploying to Vercel)*
 
 ## 🚀 Getting Started
@@ -33,46 +33,47 @@ npm start
 | Tailwind CSS | 4 | Utility-first styling |
 | next/image | — | Optimised image delivery |
 | next/font | — | Font loading (Inter via Google Fonts) |
-| lucide-react | latest | Icons (Zap, ChevronDown, ArrowUpRight, Menu, X, Mail, Phone, User) |
+| lucide-react | ^1.41.0 | Icons (Zap, ChevronDown, ArrowUpRight, ChevronRight, ChevronLeft, Menu, X, Mail, Phone, User) |
 
-## 📐 Design Decisions & Assumptions
+## 📐 Design Decisions & Deviations from Figma
 
 ### Typography
-- **Font:** Inter (Google Fonts, loaded via `next/font/google`). The Figma file references Inter as primary — confirmed via Dev Mode inspect. No font licensing issues; Google Fonts free-to-use.
+- **Font:** Inter (Google Fonts via `next/font/google`). The Figma design uses Inter as the primary typeface — confirmed visually from the full-page exports. Loaded with `variable: "--font-inter"` for CSS variable access.
+
+### Design Token Extraction
+- All color values, spacing, and typography were extracted from the Figma file using 2x PNG section exports analyzed section by section, then documented in `.kiro/steering/design-system.md`. Values are approximations derived from visual inspection rather than Figma Dev Mode (which requires edit access).
+- **Potential deviations**: Hex values may differ by ±5% from the exact Figma values. Colors documented with reasoning in design-system.md.
 
 ### Responsive Breakpoints
-- Three breakpoints as specified: 425px base, 768px (`md:`), 1280px (`lg:`).
+- Three breakpoints as specified: 425px (base), 768px (`md:`), 1280px (`lg:`).
 - All layouts use Tailwind responsive prefixes only — no custom `@media` queries.
+- Custom breakpoints registered in `globals.css` under `@theme inline` (`--breakpoint-xs: 425px`, `--breakpoint-md: 768px`, `--breakpoint-lg: 1280px`).
 
 ### Logo
-- The Figma logo uses overlapping petal/circle shapes in purple (#7B2D8B) and coral (#E8415A). Recreated as an inline SVG since the original is a vector layer in Figma. This ensures it renders crisply at all sizes without any raster image.
+- Recreated as an inline SVG (overlapping petal/circle shapes in `#7B2D8B` and `#E8415A`) — the original is a vector layer in Figma. Inline SVG ensures crisp rendering at all sizes without a raster dependency.
 
 ### Social Icons
-- The installed version of `lucide-react` no longer ships `Linkedin`, `Instagram`, or `Twitter` (removed upstream). These have been replaced with equivalent inline SVGs matching the lucide icon style.
-- All other icons (Zap, ChevronDown, ArrowUpRight, Menu, X, Mail, Phone, User) are sourced from lucide-react.
+- LinkedIn, Instagram, and X (Twitter) icons are rendered as inline SVGs matching the lucide icon style. These icons are not available in the installed version of `lucide-react` and were recreated manually.
 
-### Tailwind v4
-- The project uses Tailwind CSS v4, which uses `@import "tailwindcss"` and `@theme inline` in `globals.css` rather than a `tailwind.config.js`. All design tokens (colors, spacing, typography) are defined in the `@theme inline` block.
+### Tailwind CSS v4
+- Uses `@import "tailwindcss"` and `@theme inline` in `globals.css` (no `tailwind.config.js`). All design tokens are defined in the `@theme inline` block.
+- RGBA values use Tailwind v4 arbitrary value syntax: `text-[rgba(255,255,255,0.75)]`.
 
-### CTA Banner copy
-- Desktop and mobile show different copy as specified in the design (design-system.md documents both variants). Implemented with `hidden md:block` / `md:hidden` wrappers.
+### CTA Banner — Dual Copy
+- Desktop and mobile show different copy as documented in the Figma design exports. Implemented with both `<p>` elements always in the DOM, toggled via `hidden md:block` / `md:hidden` (not conditional rendering — both always present for accessibility).
 
-### Testimonials carousel
-- Desktop shows 3 cards simultaneously with CSS transform-based sliding. Mobile shows 1 card at a time. Navigation arrows styled as circles (desktop) / rounded squares with pink background (mobile), matching the Figma spec.
+### Testimonials Carousel — CSS Custom Property
+- The carousel `translateX` animation requires setting a dynamic pixel offset. This uses `style={{ '--carousel-offset': '...' }}` as a CSS custom property on the track wrapper — the single documented `style={{}}` usage in the codebase. The `.carousel-track` CSS class in `globals.css` consumes this variable. Fully documented in a code comment.
 
-### Management Dev Program & Transformation Hub sections
-- Both use a "large card" pattern (dark aubergine #3D1040 and pink #FDEEF0 respectively) sitting on a white page background, with internal padding — matching the Figma card layout.
-
-### Images
-- All images use `next/image` with `fill` + `sizes` attributes for responsive loading.
-- Hero image uses `priority` flag for LCP optimisation.
+### Inline Styles Policy
+- Zero `style={{}}` attributes in all components **except** the single CSS custom property in `Testimonials.tsx` for carousel animation (documented above).
 
 ## 📱 Responsive Verification
 
-Tested and verified at:
-- **425px** — Mobile: stacked layouts, hamburger nav, single-card testimonial carousel
-- **768px** — Tablet: two-column layouts restored, desktop nav visible
-- **1280px** — Desktop: full layout, multi-card carousel, two-row navigation
+Verified at:
+- **425px (mobile)**: Stacked single-column layouts, hamburger navigation, single-card testimonial carousel, rounded CTA card, mobile-specific copy
+- **768px (tablet)**: Two-column layouts restored, desktop navigation visible, carousel fully functional
+- **1280px (desktop)**: Full layout, multi-card carousel (3 visible + partial 4th), two-row navigation, all sections match Figma spec
 
 ## ⚠️ Known Issues
 
@@ -80,35 +81,35 @@ None at time of submission.
 
 ## 🤖 AI Disclosure
 
-This project was built with the assistance of **Kiro** (an AI-powered development environment by AWS). The AI generated component code, Tailwind utility class structures, and responsive layout logic based on the design system specification extracted from the Figma file. All code has been reviewed, verified to build successfully, and conforms to the assessment requirements.
+This project was built with the assistance of **Kiro** (an AI-powered development environment by AWS). The AI generated component code, Tailwind utility class structures, and responsive layout logic based on a design system specification derived from the Figma file. All code has been reviewed, verified to build successfully (`npm run build` exit code 0), and conforms to the assessment requirements. AI use is disclosed per the assessment brief.
 
 ## 📁 Project Structure
 
 ```
 tobams-landing/
 ├── app/
-│   ├── globals.css       # Tailwind v4 config + design tokens
-│   ├── layout.tsx        # Root layout (Inter font, metadata)
-│   └── page.tsx          # Page composition (imports all sections)
+│   ├── globals.css          # Tailwind v4 config + all design tokens
+│   ├── layout.tsx           # Root layout (Inter font, metadata)
+│   └── page.tsx             # Page composition (all 11 sections)
 ├── components/
-│   ├── Logo.tsx           # Inline SVG logo
-│   ├── Navigation.tsx     # Two-row desktop nav + hamburger mobile
-│   ├── Hero.tsx           # Full-bleed hero with overlay
-│   ├── LmsSection.tsx     # LMS/About two-col section
-│   ├── ServicesSection.tsx # 3 alternating service blocks
-│   ├── ManagementDevSection.tsx # Dark card with pill list
-│   ├── TrainingConsultantSection.tsx # Lavender bg with feature grid
-│   ├── TransformationHub.tsx # Pink card with pill grid
-│   ├── CtaBanner.tsx      # Full-width dark CTA strip
-│   ├── Testimonials.tsx   # Carousel with prev/next
-│   ├── PreFooterCta.tsx   # Pre-footer CTA strip
-│   └── Footer.tsx         # 4-col footer with offices card
+│   ├── Logo.tsx             # Inline SVG logo (dark prop for light/dark bg)
+│   ├── Navigation.tsx       # Two-row sticky header + hamburger mobile ("use client")
+│   ├── Hero.tsx             # Full-bleed hero section
+│   ├── LmsSection.tsx       # Learning Management System section
+│   ├── ServicesSection.tsx  # 3 alternating training service blocks
+│   ├── ManagementDevSection.tsx  # Dark card with feature pills
+│   ├── TrainingConsultantSection.tsx  # Training The Consultant section
+│   ├── TransformationHub.tsx  # Pink card with CEO webinar section
+│   ├── CtaBanner.tsx        # Full-width CTA banner (dual copy)
+│   ├── Testimonials.tsx     # Testimonial carousel ("use client")
+│   ├── PreFooterCta.tsx     # Pre-footer CTA strip
+│   └── Footer.tsx           # 4-column footer with offices card
 └── public/
-    └── images/            # All section images
+    └── images/              # All section images (WebP/JPG)
 ```
 
 ## 📎 References
 
 - **Figma Design:** https://www.figma.com/design/wuqCLkK1feTgB6xxSRRwZu/Frontend-Intern-Assessment
-- **Assessment Brief:** Tobams Group Frontend Developer Intern Assessment (HR email, deadline 7 September 2026)
 - **Submission Form:** https://forms.gle/B5MyQhLske86ACM57
+- **Deadline:** Monday, 7 September 2026, 3:00pm WAT
