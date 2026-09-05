@@ -2,15 +2,15 @@
 
 @theme inline {
   /* Brand Colors */
-  --color-primary: #7B2D8B;
+  --color-primary: #571244;
   --color-primary-dark: #5A1F6B;
-  --color-btn-cta-bg: #E8415A;
-  --color-btn-cta-hover: #C8303A;
-  --color-btn-account-bg: #4A1F6B;
+  --color-btn-cta-bg: #EF4353;
+  --color-btn-cta-hover: #d63545;
+  --color-btn-account-bg: #571244;
   --color-btn-learn-more-bg: #5A1F6B;
   --color-nav-bg: #FFFFFF;
   --color-nav-text: #1A1A1A;
-  --color-nav-active: #7B2D8B;
+  --color-nav-active: #571244;
   --color-border-light: #E8E0EC;
   --color-hero-bg: #1A1A2E;
   --color-hero-tag-bg: rgba(255,255,255,0.15);
@@ -72,8 +72,8 @@
   --color-eyebrow-italic-accent: #7B2D8B;
   --color-footer-pre-bg: #1A0A22;
 
-  /* Typography */
-  --font-family-primary: var(--font-inter), sans-serif;
+
+  --font-family-heading: var(--font-nunito), sans-serif;
 
   /* Spacing */
   --spacing-xs: 4px;
@@ -102,12 +102,17 @@
 }
 
 html {
-  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+  font-family: var(--font-nunito-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 body {
+  overflow-x: hidden;
   background: #ffffff;
   color: #1A1A1A;
+  font-weight: 600;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

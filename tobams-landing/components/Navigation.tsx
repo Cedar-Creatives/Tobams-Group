@@ -36,16 +36,19 @@ export default function Navigation() {
           <div className="hidden lg:flex items-center gap-3">
             <button
               type="button"
-              className="flex items-center gap-2 bg-[#4A1F6B] text-white text-[14px] font-semibold px-4 py-2 rounded-[6px] hover:bg-[#3a1858] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]"
+              className="flex items-center gap-2 bg-[#571244] text-white text-[14px] font-semibold px-4 rounded-[4px] h-12 hover:bg-[#3d0c30] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
               aria-label="Account"
             >
-              <User size={15} aria-hidden="true" />
+              {/* Circular avatar — 32x32, light lavender bg, dark icon */}
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#E8D5E8] flex-shrink-0">
+                <User size={16} className="text-[#571244]" aria-hidden="true" />
+              </span>
               Account
               <ChevronDown size={14} aria-hidden="true" />
             </button>
             <button
               type="button"
-              className="bg-[#E8415A] text-white text-[14px] font-semibold px-5 py-2 rounded-[6px] hover:bg-[#C8303A] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8415A]"
+              className="bg-[#EF4353] text-white text-[14px] font-semibold px-5 rounded-[4px] hover:bg-[#d63545] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EF4353] h-12 flex items-center"
             >
               Take Assessment
             </button>
@@ -54,7 +57,7 @@ export default function Navigation() {
           {/* Mobile hamburger — visible below lg */}
           <button
             type="button"
-            className="lg:hidden flex items-center justify-center w-11 h-11 bg-[#1A1A1A] rounded-[8px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]"
+            className="lg:hidden flex items-center justify-center w-11 h-11 bg-[#1A1A1A] rounded-[8px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
@@ -74,22 +77,22 @@ export default function Navigation() {
         aria-label="Main navigation"
         className="hidden lg:block border-b border-[#E8E0EC]"
       >
-        <div className="max-w-[1280px] mx-auto px-5 lg:px-10 flex items-center h-11 gap-6">
+        <div className="max-w-[1280px] mx-auto px-5 lg:px-10 flex items-center justify-center h-14 gap-8">
           {navLinks.map((link) => (
             <button
               key={link.label}
               type="button"
               className={[
-                "flex items-center gap-1 text-[14px] whitespace-nowrap transition-colors",
-                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]",
+                "flex items-center gap-1.5 text-[18px] whitespace-nowrap transition-colors leading-[150%]",
+                "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]",
                 activeItem === link.label
-                  ? "text-[#7B2D8B] font-semibold border-b-2 border-[#7B2D8B] pb-[1px]"
-                  : "text-[#1A1A1A] font-normal hover:text-[#7B2D8B]",
+                  ? "text-[#571244] font-semibold border-b-[3px] border-[#571244] pb-[2px]"
+                  : "text-[#151515] font-normal hover:text-[#571244]",
               ].join(" ")}
             >
               {link.label}
               {link.hasDropdown && (
-                <ChevronDown size={13} aria-hidden="true" />
+                <ChevronDown size={15} aria-hidden="true" />
               )}
             </button>
           ))}
@@ -110,10 +113,10 @@ export default function Navigation() {
                   type="button"
                   className={[
                     "w-full flex items-center justify-between px-5 py-3 text-sm font-medium transition-colors",
-                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]",
+                    "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]",
                     activeItem === link.label
-                      ? "text-[#7B2D8B] bg-[#F5EEF8]"
-                      : "text-[#1A1A1A] hover:bg-[#F5EEF8]",
+                      ? "text-[#571244] bg-[#F5EEF8]"
+                      : "text-[#151515] font-normal hover:bg-[#F5EEF8]",
                   ].join(" ")}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -130,15 +133,17 @@ export default function Navigation() {
           <div className="flex flex-col gap-3 px-5 py-4 border-t border-[#E8E0EC]">
             <button
               type="button"
-              className="flex items-center justify-center gap-2 bg-[#4A1F6B] text-white text-sm font-semibold px-4 py-2.5 rounded-[6px] hover:bg-[#3a1858] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7B2D8B]"
+              className="flex items-center justify-center gap-2 bg-[#571244] text-white text-sm font-semibold px-3 py-2 rounded-[6px] hover:bg-[#3d0c30] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
               aria-label="Account"
             >
-              <User size={15} aria-hidden="true" />
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#E8D5E8] flex-shrink-0">
+                <User size={16} className="text-[#571244]" aria-hidden="true" />
+              </span>
               Account
             </button>
             <button
               type="button"
-              className="bg-[#E8415A] text-white text-sm font-semibold px-5 py-2.5 rounded-[6px] hover:bg-[#C8303A] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E8415A]"
+              className="bg-[#EF4353] text-white text-sm font-semibold px-5 py-3 rounded-[4px] hover:bg-[#d63545] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#EF4353]"
             >
               Take Assessment
             </button>

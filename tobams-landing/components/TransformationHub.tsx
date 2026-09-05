@@ -1,12 +1,7 @@
 import Image from "next/image";
-import { ArrowUpRight, Zap } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-interface TransformationPill {
-  id: number;
-  label: string;
-}
-
-const transformationPills: TransformationPill[] = [
+const pills = [
   { id: 1, label: "Strategic Career Guidance" },
   { id: 2, label: "Leadership Development" },
   { id: 3, label: "CV Development" },
@@ -15,79 +10,104 @@ const transformationPills: TransformationPill[] = [
   { id: 6, label: "Business Model" },
 ];
 
+/* Bolt icon: 28x28, fill #DDD0DA, border 2px solid #571244 */
+function PillBoltIcon() {
+  return (
+    <svg
+      width="28"
+      height="28"
+      viewBox="0 0 28 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="flex-shrink-0"
+    >
+      <path
+        d="M16 3L5 16H13L12 25L23 12H15L16 3Z"
+        fill="#DDD0DA"
+        stroke="#571244"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function TransformationHub() {
   return (
     <section
-      className="py-8 lg:py-12 px-5 lg:px-20 bg-white"
+      className="w-full py-10 lg:py-16 px-5 lg:px-16"
       aria-labelledby="transformation-hub-heading"
     >
-      <div className="max-w-[1280px] mx-auto">
-        {/* Pink card */}
-        <div className="bg-[#FDEEF0] rounded-[16px] p-8 lg:p-12">
+      <div className="max-w-[1440px] mx-auto w-full">
+        {/* Card: bg rgba(239,67,83,0.2), border-radius 16px, padding 40px, gap 64px */}
+        <div className="w-full bg-[rgba(239,67,83,0.2)] rounded-[16px] p-6 lg:p-10 flex flex-col gap-6 lg:gap-8">
 
-          {/* Top section — full width */}
-          <p className="text-[#7B2D8B] italic font-semibold text-[13px] mb-1">
-            Learning With Our CEO:
+          {/* Top — full width heading section: gap 24px */}
+          <div className="flex flex-col gap-2">
+
+            {/* Eyebrow: Nunito italic 600 20px 130% #1671D9 (blue) */}
+            <p className="font-[family-name:var(--font-nunito)] italic font-semibold text-[16px] lg:text-[20px] leading-[130%] text-[#1671D9]">
+              Learning With Our CEO:
+            </p>
+
+            {/* H2: Nunito italic 600 32px 130% #571244 */}
+            <h2
+              id="transformation-hub-heading"
+              className="font-[family-name:var(--font-nunito)] italic font-semibold text-[22px] lg:text-[32px] leading-[130%] text-[#571244]"
+            >
+              Transformation Hub With Jite Newton
+            </h2>
+          </div>
+
+          {/* Body: Nunito Sans 400 18px 150% #151515 */}
+          <p className="font-normal text-[15px] lg:text-[18px] leading-[150%] text-[#151515]">
+            Transformation Hub with Jite Newton is a flagship webinar series curated by the CEO, Dr. Jite Newton. Designed to elevate career trajectories and leadership capabilities, this exclusive event offers invaluable insights and strategies for personal and professional growth. Whether you&apos;re seeking to advance your career or enhance your leadership skills, the Transformation Hub provides a transformative learning experience to unlock your full potential and drive success in your endeavours.
           </p>
-          <h2
-            id="transformation-hub-heading"
-            className="text-[#1A1A1A] italic font-bold text-[22px] lg:text-[28px] leading-[1.2] mb-4"
-          >
-            Transformation Hub With Jite Newton
-          </h2>
-          <p className="text-[#3A3A3A] text-[14px] leading-[1.7] mb-6 lg:mb-8">
-            Transformation Hub with Jite Newton is a flagship webinar series curated by the CEO,
-            Dr. Jite Newton. Designed to elevate career trajectories and leadership capabilities,
-            this exclusive event offers invaluable insights and strategies for personal and
-            professional growth. Whether you&apos;re seeking to advance your career or enhance your
-            leadership skills, the Transformation Hub provides a transformative learning experience
-            to unlock your full potential and drive success in your endeavours.
-          </p>
 
-          {/* Lower section — two-col desktop, stacked mobile */}
-          <div className="flex flex-col lg:grid lg:grid-cols-[45%_55%] gap-8 lg:gap-10 items-start">
+          {/* Lower section: image left + pill grid right, gap 32px */}
+          <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8">
 
-            {/* Left — Image */}
-            <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden">
+            {/* Image: 560x340, border-radius 8px */}
+            <div className="relative w-full lg:w-[560px] lg:h-[340px] flex-shrink-0 rounded-[8px] overflow-hidden aspect-[560/340]">
               <Image
                 src="/images/transformation-hub.jpg"
-                alt="Dr. Jite Newton, CEO of Tobams Group, presenting at the Transformation Hub webinar series"
+                alt="Dr. Jite Newton presenting at the Transformation Hub webinar series"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 45vw"
+                sizes="(max-width: 1024px) 100vw, 560px"
               />
             </div>
 
-            {/* Right — Pill grid + CTA */}
-            <div className="flex flex-col gap-4">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 lg:gap-3">
-                {transformationPills.map((pill) => (
+            {/* Right: bg rgba(255,255,255,0.3), border-radius 8px, padding 32px 20px, gap 24px */}
+            <div className="flex-1 min-w-0 bg-[rgba(255,255,255,0.3)] rounded-[8px] p-5 lg:p-8 flex flex-col gap-6 justify-between h-full">
+
+              {/* Pill grid: 2 cols, gap-x 24px, gap-y 12px */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-6">
+                {pills.map((pill) => (
                   <div
                     key={pill.id}
-                    className="flex items-center gap-2 bg-white border border-[#E8E0EC] rounded-[8px] px-4 py-3"
+                    className="flex flex-row items-center gap-2.5 bg-white rounded-[12px] px-4 py-4 h-[60px]"
                   >
-                    <Zap
-                      size={15}
-                      className="text-[#7B2D8B] flex-shrink-0"
-                      aria-hidden="true"
-                    />
-                    <span className="text-[#1A1A1A] font-medium text-[13px]">
+                    <PillBoltIcon />
+                    <span className="font-normal text-[14px] lg:text-[18px] leading-[150%] text-[#151515]">
                       {pill.label}
                     </span>
                   </div>
                 ))}
               </div>
 
-              {/* Learn More CTA */}
+              {/* Learn More: 173x48px, #571244, border-radius 4px */}
               <a
                 href="#"
-                className="inline-flex items-center gap-2 bg-[#5A1F6B] text-white text-[14px] font-semibold px-6 py-3 rounded-[6px] hover:bg-[#4A1058] transition-colors mt-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A1F6B]"
+                className="inline-flex flex-row justify-center items-center w-[173px] h-[48px] px-6 gap-2 bg-[#571244] rounded-[4px] text-white font-semibold text-[18px] leading-[150%] hover:bg-[#3d0c30] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
               >
                 Learn More
-                <ArrowUpRight size={16} aria-hidden="true" />
+                <ArrowUpRight size={24} aria-hidden="true" />
               </a>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>

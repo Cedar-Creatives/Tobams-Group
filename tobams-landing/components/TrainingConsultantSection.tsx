@@ -1,72 +1,70 @@
-import { ArrowUpRight, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-interface FeatureGridItem {
-  id: number;
-  heading: string;
-  body: string;
-}
-
-const featureGridItems: FeatureGridItem[] = [
+const featureItems = [
   {
     id: 1,
     heading: "Expert-Led Learning",
-    body: "Gain insight from seasoned professionals and industry experts who bring real-world experience to every session.",
+    body: "Gain insight from seasoned professionals in the field as they mentor you through the subtleties of business analysis.",
   },
   {
     id: 2,
     heading: "Interactive Workshops",
-    body: "Engage in hands-on workshops that reinforce theoretical knowledge with practical application.",
+    body: "Engage in hands-on workshops designed to enhance your training capabilities and provide practical insights.",
   },
   {
     id: 3,
     heading: "Comprehensive Curriculum",
-    body: "Access a robust curriculum carefully designed to cover all aspects of effective consulting and training.",
+    body: "Access a robust curriculum that covers fundamental principles and advanced methodologies, ensuring a well-rounded understanding.",
   },
   {
     id: 4,
     heading: "Global Recognition",
-    body: "You will attain a globally recognized certification that validates your expertise and opens new career opportunities.",
+    body: "You will attain a globally recognized certification, opening doors to new career opportunities and industry recognition.",
   },
 ];
 
 export default function TrainingConsultantSection() {
   return (
+    /* Section: bg rgba(87,18,68,0.1), padding 48px 64px */
     <section
-      className="bg-[#F0E8F5] py-16 lg:py-20"
+      className="w-full bg-[rgba(87,18,68,0.1)] py-10 lg:py-12 px-5 lg:px-16"
       aria-labelledby="ttc-heading"
     >
-      <div className="max-w-[1280px] mx-auto px-5 lg:px-20">
-        {/* H2 heading */}
-        <h2
-          id="ttc-heading"
-          className="text-[#1A1A1A] font-bold text-[22px] lg:text-[32px] leading-[1.2] mb-2"
-        >
-          Training The Consultant
-        </h2>
+      <div className="max-w-[1440px] mx-auto w-full flex flex-col gap-5 lg:gap-8">
 
-        {/* Accent subheading */}
-        <p className="text-[#7B2D8B] font-semibold text-[14px] mb-4">
-          Maximise Your Potential as a Certified Trainer:
+        {/* Heading group: gap 12px */}
+        <div className="flex flex-col gap-3">
+
+          {/* H2: Nunito 600 40px 130% #571244 */}
+          <h2
+            id="ttc-heading"
+            className="font-[family-name:var(--font-nunito)] font-semibold text-[26px] lg:text-[40px] leading-[130%] text-[#571244]"
+          >
+            Training The Consultant
+          </h2>
+
+          {/* Subtitle: Nunito Sans 600 18px #571244 */}
+          <p className="font-semibold text-[15px] lg:text-[18px] leading-[150%] text-[#571244]">
+            Maximise Your Potential as a Certified Trainer:
+          </p>
+        </div>
+
+        {/* Body: Nunito Sans 400 18px #151515 */}
+        <p className="font-normal text-[15px] lg:text-[18px] leading-[150%] text-[#151515]">
+          With the help of our Training Consultants program, take a revolutionary step toward becoming a distinguished certified training consultant. Learn from professionals in the field, immerse yourself in a thorough curriculum, and hone your training methods through interactive workshops. Participating in our program will enable you to gain expertise in diverse courses while also developing the abilities to mentor and encourage others in their career advancement.
         </p>
 
-        {/* Body paragraph */}
-        <p className="text-[#3A3A3A] text-[14px] leading-[1.7] mb-6">
-          Tobams Group&apos;s Training The Consultant program is designed to empower
-          individuals to become highly effective trainers and consultants. With a
-          comprehensive curriculum and expert-led training, you&apos;ll gain the skills
-          and knowledge to excel in the dynamic world of consulting and training.
-          Our program is your gateway to a successful consulting career.
-        </p>
-
-        {/* Feature grid card */}
-        <div className="bg-[#5A1F6B] rounded-[12px] p-6 lg:p-8 mb-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-8">
-            {featureGridItems.map((item) => (
-              <div key={item.id}>
-                <h3 className="text-white font-bold text-[14px] mb-1.5">
+        {/* Feature card: bg #571244, border-radius 8px, padding 24px, 2-col grid, gap 20px */}
+        <div className="w-full bg-[#571244] rounded-[8px] p-6 lg:p-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-5">
+            {featureItems.map((item) => (
+              <div key={item.id} className="flex flex-col gap-3">
+                {/* Heading: Nunito Sans 700 18px #FFFFFF */}
+                <h3 className="font-bold text-[15px] lg:text-[18px] leading-[150%] text-white">
                   {item.heading}
                 </h3>
-                <p className="text-[rgba(255,255,255,0.80)] text-[13px] leading-[1.6]">
+                {/* Body: Nunito Sans 400 18px #FFFFFF */}
+                <p className="font-normal text-[14px] lg:text-[18px] leading-[150%] text-white">
                   {item.body}
                 </p>
               </div>
@@ -74,23 +72,15 @@ export default function TrainingConsultantSection() {
           </div>
         </div>
 
-        {/* Desktop button — hidden on mobile */}
-        <button
-          type="button"
-          className="hidden lg:inline-flex items-center gap-2 bg-[#5A1F6B] text-white text-[14px] font-semibold px-6 py-3 rounded-[6px] hover:bg-[#4A1058] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A1F6B]"
+        {/* Learn More button: 173x48px #571244 border-radius 4px — outside card */}
+        <a
+          href="#"
+          className="inline-flex flex-row justify-center items-center w-[173px] h-[48px] px-6 gap-2 bg-[#571244] rounded-[4px] text-white font-semibold text-[18px] leading-[150%] hover:bg-[#3d0c30] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
         >
           Learn More
-          <ArrowUpRight size={16} aria-hidden="true" />
-        </button>
+          <ArrowUpRight size={24} aria-hidden="true" />
+        </a>
 
-        {/* Mobile button — hidden on desktop */}
-        <button
-          type="button"
-          className="inline-flex lg:hidden items-center gap-2 bg-[#5A1F6B] text-white text-[14px] font-semibold px-6 py-3 rounded-[6px] hover:bg-[#4A1058] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5A1F6B]"
-        >
-          Learn More
-          <ChevronRight size={16} aria-hidden="true" />
-        </button>
       </div>
     </section>
   );

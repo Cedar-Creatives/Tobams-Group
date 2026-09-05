@@ -1,93 +1,92 @@
 import Image from "next/image";
-import { Zap } from "lucide-react";
 
-interface FeaturePill {
-  id: number;
-  label: string;
-}
-
-const featurePills: FeaturePill[] = [
+const featurePills = [
   { id: 1, label: "Enhanced Leadership Skills" },
   { id: 2, label: "Improved Employee Engagement" },
   { id: 3, label: "Stronger Organisational Culture" },
   { id: 4, label: "Sustainable Growth" },
 ];
 
+/* White bolt icon — 32x32px, white fill per Figma */
+function WhiteBoltIcon() {
+  return (
+    <svg
+      width="32"
+      height="32"
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className="flex-shrink-0"
+    >
+      <path
+        d="M18 4L6 18H15L14 28L26 14H17L18 4Z"
+        fill="#FFFFFF"
+      />
+    </svg>
+  );
+}
+
 export default function ManagementDevSection() {
   return (
+    /* Section outer: padding 64px, gap 40px */
     <section
-      className="py-8 lg:py-12 px-5 lg:px-20"
+      className="w-full flex flex-col items-center py-10 lg:py-16 px-5 lg:px-16 gap-10"
       aria-labelledby="mdp-heading"
     >
-      <div className="max-w-[1280px] mx-auto">
-        {/* Dark aubergine card */}
-        <div className="bg-[#3D1040] rounded-[16px] p-8 lg:p-12">
-          <div className="flex flex-col lg:grid lg:grid-cols-[45%_55%] gap-8 lg:gap-12 items-start">
+      <div className="max-w-[1440px] w-full flex flex-col items-center gap-10">
+        {/* Card: bg #2C0922, border-radius 20px, padding 40px */}
+        <div className="w-full bg-[#2C0922] rounded-[20px] p-6 lg:p-10">
 
-            {/* H2 — mobile only (decorative, screen readers get the real one below) */}
-            <h2
-              className="lg:hidden text-white font-bold text-[20px] leading-[1.2]"
-              aria-hidden="true"
+          {/* Inner row: gap 48px */}
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-8 lg:gap-12">
+
+            {/* Left — Image: border-radius 8px 8px 0 8px */}
+            <div
+              className="relative w-full lg:flex-1 lg:min-w-0 overflow-hidden flex-shrink-0"
+              style={{ borderRadius: "8px 8px 0px 8px", aspectRatio: "592/639" }}
             >
-              Management Development Program
-            </h2>
-
-            {/* Left column — Image (second on mobile via DOM order, left col on desktop) */}
-            <div className="relative w-full aspect-[4/3] rounded-[12px] overflow-hidden flex-shrink-0">
               <Image
                 src="/images/management-dev.jpg"
-                alt="Three business professionals in a management development discussion"
+                alt="Three professionals collaborating on a management development session"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 45vw"
+                sizes="(max-width: 1024px) 100vw, 592px"
               />
             </div>
 
-            {/* Right column — Content (third on mobile, right col on desktop) */}
-            <div className="w-full">
-              {/* H2 — real heading: visible on desktop, also present (hidden) for screen readers on mobile */}
+            {/* Right — Content: gap 32px */}
+            <div className="w-full lg:flex-1 lg:min-w-0 flex flex-col gap-8">
+
+              {/* H2: Nunito, 600, 40px, 150%, letter-spacing 0.03em, #FFFFFF */}
               <h2
                 id="mdp-heading"
-                className="hidden lg:block text-white font-bold text-[32px] leading-[1.2] mb-4"
+                className="font-[family-name:var(--font-nunito)] font-semibold text-[26px] lg:text-[clamp(26px,2.8vw,40px)] leading-[150%] tracking-[0.03em] text-white"
               >
                 Management Development Program
               </h2>
 
-              <p className="text-[14px] leading-[1.7] mb-3 text-[rgba(255,255,255,0.80)]">
-                Tobams Group&apos;s Management Development Program (MDP) is a
-                transformative initiative meticulously crafted to nurture and
-                elevate the skills of current and aspiring managers within your
-                organisation.
-              </p>
-              <p className="text-[14px] leading-[1.7] mb-6 text-[rgba(255,255,255,0.80)]">
-                Our MDP is not just a training program; it&apos;s a strategic
-                investment in your organisation&apos;s future. By empowering your
-                managers with the latest management techniques, leadership
-                strategies, and decision-making tools, you&apos;ll position your
-                company for sustainable growth and success.
+              {/* Body: Nunito Sans, 400, 18px, #FFFFFF */}
+              <p className="font-normal text-[15px] lg:text-[18px] leading-[150%] text-white">
+                Tobams Group offers a comprehensive Management Development Program designed to equip corporate organisations with the high-performing leaders they need to thrive. Our program includes workshops, seminars, coaching sessions, online courses, and experiential learning opportunities designed to improve leadership, strategic thinking, communication, and other essential managerial competencies for corporate organisations.
               </p>
 
-              {/* Feature pill list */}
-              <ul className="flex flex-col gap-2">
+              {/* Pill list: padding 8px 16px, gap 25px */}
+              <ul className="flex flex-col gap-[25px] px-4 py-2">
                 {featurePills.map((pill) => (
                   <li
                     key={pill.id}
-                    className="flex items-center gap-2 bg-[#5A2060] rounded-[8px] px-4 py-3 w-full"
+                    className="flex flex-row items-center gap-2 bg-[#8F6182] rounded-[8px] px-2 py-1 w-full h-10"
                   >
-                    <Zap
-                      size={16}
-                      className="text-[#E8415A] flex-shrink-0"
-                      aria-hidden="true"
-                      fill="currentColor"
-                    />
-                    <span className="text-white text-[14px] font-semibold">
+                    <WhiteBoltIcon />
+                    <span className="font-semibold text-[15px] lg:text-[18px] leading-[150%] text-white flex-1">
                       {pill.label}
                     </span>
                   </li>
                 ))}
               </ul>
-            </div>
 
+            </div>
           </div>
         </div>
       </div>

@@ -3,8 +3,8 @@ import Hero from "@/components/Hero";
 import LmsSection from "@/components/LmsSection";
 import ServicesSection from "@/components/ServicesSection";
 import ManagementDevSection from "@/components/ManagementDevSection";
-import TrainingConsultantSection from "@/components/TrainingConsultantSection";
 import TransformationHub from "@/components/TransformationHub";
+import TrainingConsultantSection from "@/components/TrainingConsultantSection";
 import CtaBanner from "@/components/CtaBanner";
 import Testimonials from "@/components/Testimonials";
 import PreFooterCta from "@/components/PreFooterCta";
@@ -19,8 +19,8 @@ export default function Home() {
         <LmsSection />
         <ServicesSection />
         <ManagementDevSection />
-        <TrainingConsultantSection />
         <TransformationHub />
+        <TrainingConsultantSection />
         <CtaBanner />
         <Testimonials />
       </main>
