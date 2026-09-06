@@ -20,6 +20,15 @@ const testimonials: Testimonial[] = [
   { id: 4, name: "Sarah Johnson", role: "CEO of Tech Innovations Inc.", quote: "Tobams Group is a true partner in our journey to digital excellence. Their creativity and technical expertise have propelled our projects to new heights. Their work is top-notch, and the results speak for themselves. I can't recommend them enough!", avatar: "/images/testimonial-4.webp.jpg", avatarAlt: "Sarah Johnson, CEO of Tech Innovations Inc." },
 ];
 
+// One literal class per slide index — avoids any style= attribute.
+// 445px = card width (422px) + gap (23px).
+const CAROUSEL_OFFSETS: string[] = [
+  "translate-x-0",
+  "-translate-x-[445px]",
+  "-translate-x-[890px]",
+  "-translate-x-[1335px]",
+];
+
 /* Shared card — different sizing per breakpoint */
 function TestimonialCard({ testimonial, mobile = false }: { testimonial: Testimonial; mobile?: boolean }) {
   return (
@@ -52,14 +61,14 @@ export default function Testimonials() {
   const handlePrev = () => setCurrentIndex((i) => (i - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="w-full border-b border-[rgba(196,196,196,0.3)]" aria-labelledby="testimonials-heading">
+    <section className="w-full border-b border-[rgba(196,196,196,0.3)]" aria-labelledby="testimonials-heading-mobile testimonials-heading-desktop">
 
       {/* ── MOBILE: padding 24px 0, horizontal scroll cards ── */}
       <div className="lg:hidden flex flex-col gap-6 px-6 py-6">
 
         {/* Heading: Nunito 700 20px 130% #151515 left-aligned */}
         <h2
-          id="testimonials-heading"
+          id="testimonials-heading-mobile"
           className="font-[family-name:var(--font-nunito)] font-bold text-[20px] leading-[130%] text-[#151515]"
         >
           Testimonials
@@ -99,7 +108,7 @@ export default function Testimonials() {
 
           {/* Heading: Nunito 700 40px 130% left-aligned */}
           <h2
-            id="testimonials-heading"
+            id="testimonials-heading-desktop"
             className="font-[family-name:var(--font-nunito)] font-bold text-[40px] leading-[130%] text-[#151515]"
           >
             Testimonials
@@ -107,9 +116,11 @@ export default function Testimonials() {
 
           {/* Desktop carousel: 3 cards + partial 4th, gap 23px */}
           <div className="overflow-hidden">
+            <div aria-live="polite" aria-atomic="true" className="sr-only">
+              {testimonials[currentIndex].name}, {testimonials[currentIndex].role}
+            </div>
             <div
-              className="carousel-track flex gap-[23px]"
-              style={{ "--carousel-offset": `-${currentIndex * 445}px` } as React.CSSProperties}
+              className={`flex gap-[23px] transition-transform duration-300 ease-in-out ${CAROUSEL_OFFSETS[currentIndex]}`}
             >
               {testimonials.map((t) => (
                 <TestimonialCard key={t.id} testimonial={t} />

@@ -63,19 +63,23 @@ npm start
 - All layouts use only Tailwind responsive prefixes — zero custom `@media` queries in any source file.
 - Several sections use separate mobile/desktop JSX blocks (`lg:hidden` / `hidden lg:block`) instead of `order-` classes to avoid layout conflicts across breakpoints. Used in: LmsSection, ManagementDevSection, TransformationHub, TrainingConsultantSection, PreFooterCta, Footer, Testimonials.
 
-### Inline Styles — Documented Exceptions
-Zero `style={{}}` policy with three documented exceptions:
-
-1. **`Testimonials.tsx` — carousel animation**: `style={{ '--carousel-offset': '-Npx' }}` sets a CSS custom property. The `.carousel-track` class in `globals.css` reads it for `translateX`. Required for dynamic pixel offset without inline transforms.
-2. **`ServicesSection.tsx` — asymmetric border-radius**: Each service block has a unique four-value radius per Figma (e.g. `56px 24px 23px 12px`). Tailwind cannot express four independent corner values in one class. Driven from the data array.
-3. **`ManagementDevSection.tsx` / `TransformationHub.tsx` — image radius**: Same reason as above (`8px 8px 0px 8px`).
-
 ### CTA Banner — Dual Copy
 - Desktop and mobile show different text copy per Figma design. Both `<p>` elements always present in DOM, toggled via `hidden md:block` / `md:hidden`. Not conditional rendering — ensures both are accessible.
 
 ### Netlify Deployment
 - Deployed to Netlify using `@netlify/plugin-nextjs` for full Next.js App Router support.
 - `netlify.toml` at project root sets base directory `tobams-landing/`, build command `npm run build`, publish `.next`.
+
+## ♿ Accessibility
+
+- **Semantic HTML5 landmarks** — `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`, and `<article>` elements are used throughout. Every `<section>` landmark carries an `aria-labelledby` attribute referencing its heading ID(s), giving assistive technologies a meaningful name for each region.
+- **Meaningful alt text** — every `<Image>` component has a descriptive `alt` attribute. Decorative inline SVGs carry `aria-hidden="true"` so screen readers skip them.
+- **Native interactive elements** — all interactive controls are `<button>` or `<a>` elements, keyboard-operable by default via Tab / Enter / Space with no custom ARIA role overrides needed.
+- **Visible focus styles** — every interactive element has `focus-visible:outline` Tailwind classes so keyboard users always see a clear focus ring.
+- **Hamburger / mobile nav** — the toggle button carries `aria-expanded` and `aria-controls="mobile-menu"`. Pressing Escape while the menu is open closes it and returns focus to the hamburger button. Opening the menu via keyboard moves focus to the first nav item automatically.
+- **Testimonials carousel** — Prev / Next controls are `<button>` elements. An `aria-live="polite" aria-atomic="true"` region is present inside the carousel; its text updates to the current slide's author name and role on every slide change, so screen readers announce transitions.
+- **No duplicate `id` attributes** — every section heading that appears in both a mobile and a desktop DOM block uses distinct IDs (`<id>-mobile` / `<id>-desktop`). Each parent `<section>`'s `aria-labelledby` references both IDs via a space-separated token list (e.g. `aria-labelledby="lms-heading-mobile lms-heading-desktop"`), which is valid per the ARIA specification.
+- **Zero `style=` attributes** — all styling is expressed exclusively via Tailwind utility classes, including asymmetric border-radii (per-corner `rounded-{tl|tr|br|bl}-[Npx]` classes) and aspect ratios (`aspect-[w/h]`). No inline styles are present in the rendered HTML.
 
 ## 📱 Responsive Verification
 
@@ -87,8 +91,7 @@ Verified at all three required breakpoints:
 
 ## ⚠️ Known Issues
 
-None at time of submission.
-
+None 
 ## 🤖 AI Disclosure
 
 This project was built with the assistance of **Kiro** (an AI-powered development environment by AWS). Kiro assisted with:
@@ -104,7 +107,7 @@ All generated code was reviewed against the Figma design specifications, verifie
 ```
 tobams-landing/
 ├── app/
-│   ├── globals.css                    # Tailwind v4 @theme inline + all design tokens + carousel CSS
+│   ├── globals.css                    # Tailwind v4 @theme inline + all design tokens
 │   ├── layout.tsx                     # Root layout — Nunito Sans + Nunito via next/font/google
 │   └── page.tsx                       # Page composition — all 11 sections in correct order
 ├── components/
@@ -117,7 +120,7 @@ tobams-landing/
 │   ├── TransformationHub.tsx          # rgba(239,67,83,0.2) card, CEO webinar
 │   ├── TrainingConsultantSection.tsx  # Lavender bg, #571244 feature grid card
 │   ├── CtaBanner.tsx                  # #571244 card, dual desktop/mobile copy
-│   ├── Testimonials.tsx               # Carousel, CSS custom property animation
+│   ├── Testimonials.tsx               # Carousel with Tailwind translate animation, ARIA live region
 │   ├── PreFooterCta.tsx               # #1D0617 dark strip
 │   └── Footer.tsx                     # #11040E footer, 4-col desktop / stacked mobile
 ├── public/

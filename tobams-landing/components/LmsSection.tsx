@@ -15,13 +15,13 @@ export default function LmsSection() {
     <section
       id="about"
       className="w-full bg-[rgba(87,18,68,0.1)] pt-10"
-      aria-labelledby="lms-heading"
+      aria-labelledby="lms-heading-mobile lms-heading-desktop"
     >
       {/* ── MOBILE layout (flex-col, padding 24px, gap 24px) ── */}
       <div className="lg:hidden flex flex-col gap-6 p-6">
         {/* H2 mobile: Nunito 600 20px 0.03em #571244 */}
         <h2
-          id="lms-heading"
+          id="lms-heading-mobile"
           className="font-[family-name:var(--font-nunito)] font-semibold text-[20px] leading-[150%] tracking-[0.03em] text-[#571244]"
         >
           Learning Management System
@@ -88,7 +88,7 @@ export default function LmsSection() {
         <div className="flex flex-col gap-6 flex-1 min-w-0">
           {/* H2 desktop: Nunito 600 40px */}
           <h2
-            id="lms-heading"
+            id="lms-heading-desktop"
             className="font-[family-name:var(--font-nunito)] font-semibold text-[40px] leading-[150%] tracking-[0.03em] text-[#571244]"
           >
             Learning Management System

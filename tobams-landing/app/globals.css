@@ -91,11 +91,6 @@
   --breakpoint-lg: 1280px;
 }
 
-/* Carousel track — consumed by Testimonials.tsx via CSS custom property --carousel-offset */
-.carousel-track {
-  transform: translateX(var(--carousel-offset, 0px));
-  transition: transform 0.3s ease;
-}
 
 * {
   box-sizing: border-box;

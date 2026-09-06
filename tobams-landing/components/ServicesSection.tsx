@@ -1,14 +1,14 @@
 import Image from "next/image";
 
 interface ServiceBlock {
-  mobileImageRadius: string;
   id: number;
   title: string;
   body: string;
   image: string;
   imageAlt: string;
   imagePosition: "left" | "right";
-  imageRadius: string;
+  imageRadiusClass: string;       // desktop per-corner Tailwind classes
+  mobileImageRadiusClass: string; // mobile per-corner Tailwind classes
   items: string[];
 }
 
@@ -20,8 +20,8 @@ const serviceBlocks: ServiceBlock[] = [
     image: "/images/corporate-trainings.jpg",
     imageAlt: "Corporate training session with a trainer presenting to a team in a boardroom",
     imagePosition: "right",
-    imageRadius: "56px 24px 23px 12px",
-    mobileImageRadius: "30px 24px 23px 40px",
+    imageRadiusClass: "rounded-tl-[56px] rounded-tr-[24px] rounded-br-[23px] rounded-bl-[12px]",
+    mobileImageRadiusClass: "rounded-tl-[30px] rounded-tr-[24px] rounded-br-[23px] rounded-bl-[40px]",
     items: [
       "Leadership Training",
       "Strategic Planning and Implementation",
@@ -37,8 +37,8 @@ const serviceBlocks: ServiceBlock[] = [
     image: "/images/individual-training.jpg",
     imageAlt: "Individual professional engaged in personalised learning and development",
     imagePosition: "left",
-    imageRadius: "33px 8px 8px 8px",
-    mobileImageRadius: "33px 8px 8px 8px",
+    imageRadiusClass: "rounded-tl-[33px] rounded-tr-[8px] rounded-br-[8px] rounded-bl-[8px]",
+    mobileImageRadiusClass: "rounded-tl-[33px] rounded-tr-[8px] rounded-br-[8px] rounded-bl-[8px]",
     items: [
       "Leadership Development",
       "Soft Skills Development",
@@ -55,8 +55,8 @@ const serviceBlocks: ServiceBlock[] = [
     image: "/images/capacity-development.jpg",
     imageAlt: "Group capacity development workshop with professionals collaborating",
     imagePosition: "right",
-    imageRadius: "40px 8px 8px 8px",
-    mobileImageRadius: "33px 8px 8px 8px",
+    imageRadiusClass: "rounded-tl-[40px] rounded-tr-[8px] rounded-br-[8px] rounded-bl-[8px]",
+    mobileImageRadiusClass: "rounded-tl-[33px] rounded-tr-[8px] rounded-br-[8px] rounded-bl-[8px]",
     items: [
       "Tailored Training Programs",
       "Expert-Led Workshops",
@@ -119,8 +119,7 @@ export default function ServicesSection() {
 
               {/* Mobile image */}
               <div
-                className="block lg:hidden relative w-full aspect-[602/346] overflow-hidden mb-2"
-                style={{ borderRadius: block.imageRadius }}
+                className={`block lg:hidden relative w-full aspect-[602/346] overflow-hidden mb-2 ${block.mobileImageRadiusClass}`}
               >
                 <Image
                   src={block.image}
@@ -152,10 +151,9 @@ export default function ServicesSection() {
 
             {/* Image column — flex-1 so it shrinks with viewport, aspect ratio preserves proportions */}
             <div
-              className={`hidden lg:block lg:flex-1 lg:min-w-0 relative overflow-hidden${
+              className={`hidden lg:block lg:flex-1 lg:min-w-0 relative overflow-hidden ${block.imageRadiusClass} aspect-[602/346]${
                 block.imagePosition === "left" ? " lg:order-1" : ""
               }`}
-              style={{ borderRadius: block.imageRadius, aspectRatio: "602 / 346" }}
             >
               <Image
                 src={block.image}

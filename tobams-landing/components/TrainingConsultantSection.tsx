@@ -9,7 +9,7 @@ const featureItems = [
 
 export default function TrainingConsultantSection() {
   return (
-    <section className="w-full" aria-labelledby="ttc-heading">
+    <section className="w-full" aria-labelledby="ttc-heading-mobile ttc-heading-desktop">
 
       {/* ── MOBILE: bg rgba(87,18,68,0.1), padding 24px ── */}
       <div className="lg:hidden bg-[rgba(87,18,68,0.1)] p-6 flex flex-col gap-8">
@@ -18,7 +18,7 @@ export default function TrainingConsultantSection() {
         <div className="flex flex-col gap-3">
           {/* H2: Nunito 600 24px 130% #571244 */}
           <h2
-            id="ttc-heading"
+            id="ttc-heading-mobile"
             className="font-[family-name:var(--font-nunito)] font-semibold text-[24px] leading-[130%] text-[#571244]"
           >
             Training The Consultant
@@ -66,7 +66,7 @@ export default function TrainingConsultantSection() {
 
           <div className="flex flex-col gap-3">
             <h2
-              id="ttc-heading"
+              id="ttc-heading-desktop"
               className="font-[family-name:var(--font-nunito)] font-semibold text-[26px] lg:text-[40px] leading-[130%] text-[#571244]"
             >
               Training The Consultant

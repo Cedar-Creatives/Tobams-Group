@@ -21,7 +21,7 @@ function PillBoltIcon({ size = 28 }: { size?: number }) {
 
 export default function TransformationHub() {
   return (
-    <section className="w-full" aria-labelledby="transformation-hub-heading">
+    <section className="w-full" aria-labelledby="transformation-hub-heading-mobile transformation-hub-heading-desktop">
 
       {/* ── MOBILE: padding 24px, gap 40px, bg #FFFFFF ── */}
       <div className="lg:hidden bg-white flex flex-col gap-10 p-6">
@@ -37,7 +37,7 @@ export default function TransformationHub() {
             </p>
             {/* H2: Nunito italic 600 20px 130% #571244 */}
             <h2
-              id="transformation-hub-heading"
+              id="transformation-hub-heading-mobile"
               className="font-[family-name:var(--font-nunito)] italic font-semibold text-[20px] leading-[130%] text-[#571244]"
             >
               Transformation Hub With Jite Newton
@@ -52,7 +52,7 @@ export default function TransformationHub() {
             </p>
 
             {/* Image: 295x232, radius 8px */}
-            <div className="relative w-full overflow-hidden rounded-[8px]" style={{ aspectRatio: "295/232" }}>
+            <div className="relative w-full overflow-hidden rounded-[8px] aspect-[295/232]">
               <Image
                 src="/images/transformation-hub.jpg"
                 alt="Dr. Jite Newton presenting at the Transformation Hub webinar series"
@@ -97,7 +97,7 @@ export default function TransformationHub() {
                 Learning With Our CEO:
               </p>
               <h2
-                id="transformation-hub-heading"
+                id="transformation-hub-heading-desktop"
                 className="font-[family-name:var(--font-nunito)] italic font-semibold text-[22px] lg:text-[32px] leading-[130%] text-[#571244]"
               >
                 Transformation Hub With Jite Newton

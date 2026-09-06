@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ChevronDown, User, Menu, X } from "lucide-react";
 import Logo from "./Logo";
 
@@ -23,6 +23,27 @@ const navLinks: NavLink[] = [
 export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeItem] = useState("About");
+
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const firstMenuItemRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+        hamburgerRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (mobileOpen) {
+      firstMenuItemRef.current?.focus();
+    }
+  }, [mobileOpen]);
 
   return (
     <header className="bg-[#F9F9F9] sticky top-0 z-50 shadow-[0_0_2px_rgba(0,0,0,0.25)]">
@@ -58,6 +79,7 @@ export default function Navigation() {
           <button
             type="button"
             className="lg:hidden flex items-center justify-center w-8 h-8 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
+            ref={hamburgerRef}
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
@@ -107,10 +129,11 @@ export default function Navigation() {
           className="lg:hidden bg-white border-t border-[#E8E0EC]"
         >
           <ul className="flex flex-col py-2" role="list">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               <li key={link.label}>
                 <button
                   type="button"
+                  ref={index === 0 ? firstMenuItemRef : undefined}
                   className={[
                     "w-full flex items-center justify-between px-5 py-3 text-sm font-medium transition-colors",
                     "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]",

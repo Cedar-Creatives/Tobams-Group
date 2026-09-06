@@ -17,7 +17,7 @@ function WhiteBoltIcon() {
 
 export default function ManagementDevSection() {
   return (
-    <section className="w-full flex flex-col items-center py-8 lg:py-16 px-5 lg:px-16 gap-10" aria-labelledby="mdp-heading">
+    <section className="w-full flex flex-col items-center py-8 lg:py-16 px-5 lg:px-16 gap-10" aria-labelledby="mdp-heading-mobile mdp-heading-desktop">
       <div className="max-w-[1440px] w-full">
 
         {/* ── MOBILE card: padding 16px 20px, radius 20px, bg #2C0922 ── */}
@@ -26,7 +26,7 @@ export default function ManagementDevSection() {
 
             {/* H2 mobile: Nunito 600 16px 0.03em #FFFFFF */}
             <h2
-              id="mdp-heading"
+              id="mdp-heading-mobile"
               className="font-[family-name:var(--font-nunito)] font-semibold text-[16px] leading-[150%] tracking-[0.03em] text-white"
             >
               Management Development Program
@@ -34,8 +34,7 @@ export default function ManagementDevSection() {
 
             {/* Image mobile: 287x232, radius 8px 8px 0 8px */}
             <div
-              className="relative w-full overflow-hidden flex-shrink-0"
-              style={{ borderRadius: "8px 8px 0px 8px", aspectRatio: "287/232" }}
+              className="relative w-full overflow-hidden flex-shrink-0 rounded-tl-[8px] rounded-tr-[8px] rounded-br-[0px] rounded-bl-[8px] aspect-[287/232]"
             >
               <Image
                 src="/images/management-dev.jpg"
@@ -71,8 +70,7 @@ export default function ManagementDevSection() {
 
             {/* Left — Image desktop: radius 8px 8px 0 8px */}
             <div
-              className="relative flex-1 min-w-0 overflow-hidden flex-shrink-0"
-              style={{ borderRadius: "8px 8px 0px 8px", aspectRatio: "592/639" }}
+              className="relative flex-1 min-w-0 overflow-hidden flex-shrink-0 rounded-tl-[8px] rounded-tr-[8px] rounded-br-[0px] rounded-bl-[8px] aspect-[592/639]"
             >
               <Image
                 src="/images/management-dev.jpg"
@@ -86,7 +84,7 @@ export default function ManagementDevSection() {
             {/* Right — Content desktop */}
             <div className="flex-1 min-w-0 flex flex-col gap-8">
               <h2
-                id="mdp-heading"
+                id="mdp-heading-desktop"
                 className="font-[family-name:var(--font-nunito)] font-semibold text-[clamp(26px,2.8vw,40px)] leading-[150%] tracking-[0.03em] text-white"
               >
                 Management Development Program
