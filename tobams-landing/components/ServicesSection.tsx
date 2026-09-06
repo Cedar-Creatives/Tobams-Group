@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 interface ServiceBlock {
+  mobileImageRadius: string;
   id: number;
   title: string;
   body: string;
@@ -20,6 +21,7 @@ const serviceBlocks: ServiceBlock[] = [
     imageAlt: "Corporate training session with a trainer presenting to a team in a boardroom",
     imagePosition: "right",
     imageRadius: "56px 24px 23px 12px",
+    mobileImageRadius: "30px 24px 23px 40px",
     items: [
       "Leadership Training",
       "Strategic Planning and Implementation",
@@ -36,6 +38,7 @@ const serviceBlocks: ServiceBlock[] = [
     imageAlt: "Individual professional engaged in personalised learning and development",
     imagePosition: "left",
     imageRadius: "33px 8px 8px 8px",
+    mobileImageRadius: "33px 8px 8px 8px",
     items: [
       "Leadership Development",
       "Soft Skills Development",
@@ -53,6 +56,7 @@ const serviceBlocks: ServiceBlock[] = [
     imageAlt: "Group capacity development workshop with professionals collaborating",
     imagePosition: "right",
     imageRadius: "40px 8px 8px 8px",
+    mobileImageRadius: "33px 8px 8px 8px",
     items: [
       "Tailored Training Programs",
       "Expert-Led Workshops",
@@ -92,12 +96,12 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="bg-white py-10 lg:py-16 px-5 lg:px-16"
+      className="bg-white p-6 lg:py-16 lg:px-16"
       aria-labelledby="services-heading"
     >
       <h2 id="services-heading" className="sr-only">Our Services</h2>
 
-      <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-16 lg:gap-[120px]">
+      <div className="w-full max-w-[1440px] mx-auto flex flex-col gap-6 lg:gap-[120px]">
         {serviceBlocks.map((block) => (
           <div
             key={block.id}
@@ -109,7 +113,7 @@ export default function ServicesSection() {
                 block.imagePosition === "left" ? " lg:order-2" : ""
               }`}
             >
-              <h2 className="font-[family-name:var(--font-nunito)] font-semibold text-[22px] lg:text-[clamp(22px,2.8vw,40px)] leading-[150%] tracking-[0.03em] text-[#151515]">
+              <h2 className="font-[family-name:var(--font-nunito)] font-semibold text-[20px] lg:text-[clamp(22px,2.8vw,40px)] leading-[150%] tracking-[0.03em] text-[#151515]">
                 {block.title}
               </h2>
 
@@ -127,7 +131,7 @@ export default function ServicesSection() {
                 />
               </div>
 
-              <p className="font-normal text-[15px] md:text-[16px] lg:text-[18px] leading-[150%] text-[#696969]">
+              <p className="font-normal text-[14px] lg:text-[18px] leading-[150%] text-[#696969]">
                 {block.body}
               </p>
 
@@ -138,7 +142,7 @@ export default function ServicesSection() {
                 {block.items.map((item) => (
                   <li key={item} className="flex items-center gap-3.5">
                     <BoltIcon />
-                    <span className="font-normal text-[15px] md:text-[16px] lg:text-[18px] leading-[150%] text-[#696969]">
+                    <span className="font-normal text-[14px] lg:text-[18px] leading-[150%] text-[#696969]">
                       {item}
                     </span>
                   </li>

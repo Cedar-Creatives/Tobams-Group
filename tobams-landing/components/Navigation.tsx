@@ -25,10 +25,10 @@ export default function Navigation() {
   const [activeItem] = useState("About");
 
   return (
-    <header className="bg-white sticky top-0 z-50 shadow-sm">
+    <header className="bg-[#F9F9F9] sticky top-0 z-50 shadow-[0_0_2px_rgba(0,0,0,0.25)]">
       {/* ── Row 1: Top bar (Logo + Account + Take Assessment) ── */}
       <div className="border-b border-[#E8E0EC]">
-        <div className="max-w-[1280px] mx-auto px-5 lg:px-10 flex items-center justify-between h-14">
+        <div className="max-w-[1440px] mx-auto px-6 lg:px-10 flex items-center justify-between pt-[18px] pb-4 lg:h-14 lg:pt-0 lg:pb-0">
           {/* Logo — always visible */}
           <Logo />
 
@@ -57,16 +57,16 @@ export default function Navigation() {
           {/* Mobile hamburger — visible below lg */}
           <button
             type="button"
-            className="lg:hidden flex items-center justify-center w-11 h-11 bg-[#1A1A1A] rounded-[8px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
+            className="lg:hidden flex items-center justify-center w-8 h-8 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#571244]"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
           >
             {mobileOpen ? (
-              <X size={20} className="text-white" aria-hidden="true" />
+              <X size={20} className="text-[#151515]" aria-hidden="true" />
             ) : (
-              <Menu size={20} className="text-white" aria-hidden="true" />
+              <Menu size={20} className="text-[#151515]" aria-hidden="true" />
             )}
           </button>
         </div>
