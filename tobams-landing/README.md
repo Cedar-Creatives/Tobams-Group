@@ -4,8 +4,7 @@ Pixel-perfect, fully responsive Next.js landing page converted from the [Figma d
 
 ## 🔗 Live URL
 
-> **[https://tobams-landing.vercel.app](https://tobams-landing.vercel.app)**
-> *(Update this link after deploying to Vercel)*
+> **[https://tobams-group.netlify.app](https://tobams-group.netlify.app)**
 
 ## 🚀 Getting Started
 
@@ -32,48 +31,59 @@ npm start
 | TypeScript | 5 | Type safety |
 | Tailwind CSS | 4 | Utility-first styling |
 | next/image | — | Optimised image delivery |
-| next/font | — | Font loading (Inter via Google Fonts) |
+| next/font | — | Font loading (Nunito Sans + Nunito via Google Fonts) |
 | lucide-react | ^1.41.0 | Icons (Zap, ChevronDown, ArrowUpRight, ChevronRight, ChevronLeft, Menu, X, Mail, Phone, User) |
+| @netlify/plugin-nextjs | latest | Next.js App Router support on Netlify |
 
 ## 📐 Design Decisions & Deviations from Figma
 
 ### Typography
-- **Font:** Inter (Google Fonts via `next/font/google`). The Figma design uses Inter as the primary typeface — confirmed visually from the full-page exports. Loaded with `variable: "--font-inter"` for CSS variable access.
+- **Primary font (UI/body):** `Nunito Sans` — confirmed directly from Figma Dev Mode inspect. Typography panel shows `Font: Nunito Sans`, `Weight: 600`, `Size: 14px`, `Line height: 150%`. Loaded via `next/font/google` with weights 300/400/600/700/800.
+- **Heading font:** `Nunito` (distinct from Nunito Sans) — confirmed from Figma inspect on section headings. Loaded separately via `next/font/google`.
+- Both fonts use CSS variables `--font-nunito-sans` and `--font-nunito`. No `<link>` tags or `@import` statements used.
+- Base body styles in `globals.css`: `font-size: 14px`, `line-height: 1.5`, `font-weight: 600`.
 
 ### Design Token Extraction
-- All color values, spacing, and typography were extracted from the Figma file using 2x PNG section exports analyzed section by section, then documented in `.kiro/steering/design-system.md`. Values are approximations derived from visual inspection rather than Figma Dev Mode (which requires edit access).
-- **Potential deviations**: Hex values may differ by ±5% from the exact Figma values. Colors documented with reasoning in design-system.md.
-
-### Responsive Breakpoints
-- Three breakpoints as specified: 425px (base), 768px (`md:`), 1280px (`lg:`).
-- All layouts use Tailwind responsive prefixes only — no custom `@media` queries.
-- Custom breakpoints registered in `globals.css` under `@theme inline` (`--breakpoint-xs: 425px`, `--breakpoint-md: 768px`, `--breakpoint-lg: 1280px`).
+- All design tokens (hex colors, spacing, font sizes, border-radii, padding) were extracted **directly from the Figma file** via the Figma Dev Mode CSS properties panel. Each section's CSS was taken verbatim from Figma inspect output and implemented precisely.
+- All tokens are defined in `app/globals.css` under `@theme inline` and consumed as Tailwind utility classes.
+- **No approximations** — values are exact from Figma (e.g. `#571244`, `rgba(87,18,68,0.1)`, `border-radius: 20px`, `gap: 48px`).
 
 ### Logo
-- Recreated as an inline SVG (overlapping petal/circle shapes in `#7B2D8B` and `#E8415A`) — the original is a vector layer in Figma. Inline SVG ensures crisp rendering at all sizes without a raster dependency.
+- Uses `/public/images/logo.png` via `next/image`. `Logo.tsx` accepts a `dark` boolean prop — when `true`, applies `brightness-0 invert` Tailwind filter for use on dark backgrounds (Navigation top bar). The footer renders the full-color version without the filter.
 
 ### Social Icons
-- LinkedIn, Instagram, and X (Twitter) icons are rendered as inline SVGs matching the lucide icon style. These icons are not available in the installed version of `lucide-react` and were recreated manually.
+- LinkedIn, Instagram, and X (Twitter) icons are inline SVGs. These are not available in the installed version of `lucide-react` and were hand-coded based on the Figma design.
 
 ### Tailwind CSS v4
-- Uses `@import "tailwindcss"` and `@theme inline` in `globals.css` (no `tailwind.config.js`). All design tokens are defined in the `@theme inline` block.
-- RGBA values use Tailwind v4 arbitrary value syntax: `text-[rgba(255,255,255,0.75)]`.
+- Uses `@import 'tailwindcss'` and `@theme inline` in `globals.css` — no `tailwind.config.js`. All design tokens defined in `@theme inline` and referenced throughout components.
+- RGBA values use Tailwind v4 arbitrary syntax: e.g. `bg-[rgba(87,18,68,0.1)]`, `text-[rgba(255,255,255,0.75)]`.
+
+### Responsive Breakpoints
+- Three breakpoints as specified: **425px** (base), **768px** (`md:`), **1280px** (`lg:`).
+- All layouts use only Tailwind responsive prefixes — zero custom `@media` queries in any source file.
+- Several sections use separate mobile/desktop JSX blocks (`lg:hidden` / `hidden lg:block`) instead of `order-` classes to avoid layout conflicts across breakpoints. Used in: LmsSection, ManagementDevSection, TransformationHub, TrainingConsultantSection, PreFooterCta, Footer, Testimonials.
+
+### Inline Styles — Documented Exceptions
+Zero `style={{}}` policy with three documented exceptions:
+
+1. **`Testimonials.tsx` — carousel animation**: `style={{ '--carousel-offset': '-Npx' }}` sets a CSS custom property. The `.carousel-track` class in `globals.css` reads it for `translateX`. Required for dynamic pixel offset without inline transforms.
+2. **`ServicesSection.tsx` — asymmetric border-radius**: Each service block has a unique four-value radius per Figma (e.g. `56px 24px 23px 12px`). Tailwind cannot express four independent corner values in one class. Driven from the data array.
+3. **`ManagementDevSection.tsx` / `TransformationHub.tsx` — image radius**: Same reason as above (`8px 8px 0px 8px`).
 
 ### CTA Banner — Dual Copy
-- Desktop and mobile show different copy as documented in the Figma design exports. Implemented with both `<p>` elements always in the DOM, toggled via `hidden md:block` / `md:hidden` (not conditional rendering — both always present for accessibility).
+- Desktop and mobile show different text copy per Figma design. Both `<p>` elements always present in DOM, toggled via `hidden md:block` / `md:hidden`. Not conditional rendering — ensures both are accessible.
 
-### Testimonials Carousel — CSS Custom Property
-- The carousel `translateX` animation requires setting a dynamic pixel offset. This uses `style={{ '--carousel-offset': '...' }}` as a CSS custom property on the track wrapper — the single documented `style={{}}` usage in the codebase. The `.carousel-track` CSS class in `globals.css` consumes this variable. Fully documented in a code comment.
-
-### Inline Styles Policy
-- Zero `style={{}}` attributes in all components **except** the single CSS custom property in `Testimonials.tsx` for carousel animation (documented above).
+### Netlify Deployment
+- Deployed to Netlify using `@netlify/plugin-nextjs` for full Next.js App Router support.
+- `netlify.toml` at project root sets base directory `tobams-landing/`, build command `npm run build`, publish `.next`.
 
 ## 📱 Responsive Verification
 
-Verified at:
-- **425px (mobile)**: Stacked single-column layouts, hamburger navigation, single-card testimonial carousel, rounded CTA card, mobile-specific copy
-- **768px (tablet)**: Two-column layouts restored, desktop navigation visible, carousel fully functional
-- **1280px (desktop)**: Full layout, multi-card carousel (3 visible + partial 4th), two-row navigation, all sections match Figma spec
+Verified at all three required breakpoints:
+
+- **425px (mobile)**: Single-column stacked layouts, hamburger nav (`#F9F9F9` bg), horizontal-scroll testimonials, rounded CTA card with mobile-specific copy, 14px body / 20–24px headings
+- **768px (tablet)**: Two-column layouts restored, desktop nav visible, carousel active
+- **1280px (desktop)**: Full Figma-spec layout — two-row nav, all two-column sections, 3-card testimonial carousel, exact Figma typography and spacing
 
 ## ⚠️ Known Issues
 
@@ -81,31 +91,38 @@ None at time of submission.
 
 ## 🤖 AI Disclosure
 
-This project was built with the assistance of **Kiro** (an AI-powered development environment by AWS). The AI generated component code, Tailwind utility class structures, and responsive layout logic based on a design system specification derived from the Figma file. All code has been reviewed, verified to build successfully (`npm run build` exit code 0), and conforms to the assessment requirements. AI use is disclosed per the assessment brief.
+This project was built with the assistance of **Kiro** (an AI-powered development environment by AWS). Kiro assisted with:
+- Scaffolding the Next.js project structure and all component files
+- Generating Tailwind CSS utility class implementations from Figma CSS property values
+- Writing responsive layout logic for all 11 sections across mobile, tablet, and desktop
+- Producing the `netlify.toml` deployment configuration
+
+All generated code was reviewed against the Figma design specifications, verified to build successfully (`npm run build` exits 0, zero TypeScript errors, zero ESLint errors), and tested at all three required viewport widths. AI use is disclosed per the assessment brief requirement.
 
 ## 📁 Project Structure
 
 ```
 tobams-landing/
 ├── app/
-│   ├── globals.css          # Tailwind v4 config + all design tokens
-│   ├── layout.tsx           # Root layout (Inter font, metadata)
-│   └── page.tsx             # Page composition (all 11 sections)
+│   ├── globals.css                    # Tailwind v4 @theme inline + all design tokens + carousel CSS
+│   ├── layout.tsx                     # Root layout — Nunito Sans + Nunito via next/font/google
+│   └── page.tsx                       # Page composition — all 11 sections in correct order
 ├── components/
-│   ├── Logo.tsx             # Inline SVG logo (dark prop for light/dark bg)
-│   ├── Navigation.tsx       # Two-row sticky header + hamburger mobile ("use client")
-│   ├── Hero.tsx             # Full-bleed hero section
-│   ├── LmsSection.tsx       # Learning Management System section
-│   ├── ServicesSection.tsx  # 3 alternating training service blocks
-│   ├── ManagementDevSection.tsx  # Dark card with feature pills
-│   ├── TrainingConsultantSection.tsx  # Training The Consultant section
-│   ├── TransformationHub.tsx  # Pink card with CEO webinar section
-│   ├── CtaBanner.tsx        # Full-width CTA banner (dual copy)
-│   ├── Testimonials.tsx     # Testimonial carousel ("use client")
-│   ├── PreFooterCta.tsx     # Pre-footer CTA strip
-│   └── Footer.tsx           # 4-column footer with offices card
-└── public/
-    └── images/              # All section images (WebP/JPG)
+│   ├── Logo.tsx                       # next/image logo.png with dark prop
+│   ├── Navigation.tsx                 # Two-row sticky desktop nav + mobile hamburger
+│   ├── Hero.tsx                       # Full-bleed hero, 317px mobile / 511px desktop
+│   ├── LmsSection.tsx                 # Lavender bg, circular image, course list
+│   ├── ServicesSection.tsx            # 3 alternating service blocks, custom bolt SVG
+│   ├── ManagementDevSection.tsx       # Dark #2C0922 card, #8F6182 feature pills
+│   ├── TransformationHub.tsx          # rgba(239,67,83,0.2) card, CEO webinar
+│   ├── TrainingConsultantSection.tsx  # Lavender bg, #571244 feature grid card
+│   ├── CtaBanner.tsx                  # #571244 card, dual desktop/mobile copy
+│   ├── Testimonials.tsx               # Carousel, CSS custom property animation
+│   ├── PreFooterCta.tsx               # #1D0617 dark strip
+│   └── Footer.tsx                     # #11040E footer, 4-col desktop / stacked mobile
+├── public/
+│   └── images/                        # All section images + logo.png
+└── netlify.toml                       # Netlify deployment config
 ```
 
 ## 📎 References
