@@ -1,9 +1,6 @@
 # Kiro IDE spec files and steering — not for submission
 .kiro/
 
-# Assessment brief (private HR document)
-tobams-assessment-requirements.md
-
 # ---- tobams-landing (Next.js project) ----
 
 # dependencies
@@ -46,3 +43,4 @@ yarn-error.log*
 # typescript
 tobams-landing/*.tsbuildinfo
 tobams-landing/next-env.d.ts
+
